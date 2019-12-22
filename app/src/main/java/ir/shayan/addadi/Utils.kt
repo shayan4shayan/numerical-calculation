@@ -134,3 +134,16 @@ fun Expression.findRoot4(start: Double, moshtag: Expression, error: Double): Dou
 
     return currentRoot
 }
+
+fun Expression.drawPints(start: Double, end: Double, numPoints: Int): List<Pair<Double, Double>> {
+    require(start < end) { "start point must be less than end point" }
+    val step = (end - start) / numPoints
+    val points = ArrayList<Pair<Double, Double>>()
+    points.addAll((0 until numPoints).map { start + it * step }.map {
+        Pair(
+            it,
+            eval(Pair("x", it))
+        )
+    })
+    return points
+}
