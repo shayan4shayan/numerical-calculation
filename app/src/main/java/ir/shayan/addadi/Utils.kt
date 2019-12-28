@@ -2,6 +2,8 @@ package ir.shayan.addadi
 
 import org.mariuszgromada.math.mxparser.Argument
 import org.mariuszgromada.math.mxparser.Expression
+import java.lang.StringBuilder
+
 
 fun Expression.eval(map: Pair<String, Double>) = apply {
     removeAllArguments()
@@ -117,7 +119,7 @@ fun Expression.findRoot3(
     return currentRoot
 }
 
-fun Expression.findRoot4(start: Double, moshtag: Expression, error: Double): Double {
+fun Expression.findRootNioton(start: Double, moshtag: Expression, error: Double): Double {
     val maxStep = 100
 
     var lastRoot: Double
@@ -146,4 +148,62 @@ fun Expression.drawPints(start: Double, end: Double, numPoints: Int): List<Pair<
         )
     })
     return points
+}
+
+fun daronYabLagrange(x: DoubleArray, fx: DoubleArray): Expression {
+    return Expression().apply {
+        var out = doubleArrayOf(0.0)
+        for (index in x.indices) {
+            out = sum(out, multiply(lagrange(x,index), fx[index]))
+        }
+        expressionString = StringBuilder().apply {
+            for (index in out.indices){
+                if (index!=0){
+                    append("+")
+                }
+                append(out[index])
+                append("*")
+                append("x^$index")
+            }
+        }.toString()
+    }
+}
+
+private fun lagrange(x: DoubleArray, i: Int): DoubleArray {
+    var res = doubleArrayOf(1.0)
+    for (item in x) {
+        res = multiply(res, doubleArrayOf(item, 1.0))
+    }
+    return res
+}
+
+private fun multiply(a: DoubleArray, b: DoubleArray): DoubleArray {
+    val prod = DoubleArray(a.size + b.size - 1)
+    for (i in 0 until a.size + b.size - 1) {
+        prod[i] = 0.0
+    }
+
+    for (i in a.indices) {
+        for (j in b.indices) {
+            prod[i + j] += a[i] * b[j]
+        }
+    }
+
+    return prod
+}
+
+private fun multiply(x: DoubleArray, y: Double): DoubleArray {
+    return DoubleArray(x.size).apply {
+        x.forEach {
+            set(x.indexOf(it), it * y)
+        }
+    }
+}
+
+private fun sum(x: DoubleArray, y: DoubleArray): DoubleArray {
+    return DoubleArray(x.size).apply {
+        for (i in x.indices) {
+            set(i, x[i] + y[i])
+        }
+    }
 }
