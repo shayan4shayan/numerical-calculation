@@ -154,11 +154,11 @@ fun daronYabLagrange(x: DoubleArray, fx: DoubleArray): Expression {
     return Expression().apply {
         var out = doubleArrayOf(0.0)
         for (index in x.indices) {
-            out = sum(out, multiply(lagrange(x,index), fx[index]))
+            out = sum(out, multiply(lagrange(x, index), fx[index]))
         }
         expressionString = StringBuilder().apply {
-            for (index in out.indices){
-                if (index!=0){
+            for (index in out.indices) {
+                if (index != 0) {
                     append("+")
                 }
                 append(out[index])
@@ -205,5 +205,30 @@ private fun sum(x: DoubleArray, y: DoubleArray): DoubleArray {
         for (i in x.indices) {
             set(i, x[i] + y[i])
         }
+    }
+}
+
+fun daronyabNioton(x: DoubleArray, fx: DoubleArray): Expression {
+    val mat = ArrayList<DoubleArray>()
+    mat.add(fx)
+    var lastArr = fx
+    for (i in (0 until x.size - 1)) {
+        val arr = DoubleArray(x.size - i)
+        for (j in (0 until x.size - 1 - i)) {
+            arr[j] = (lastArr[j + 1] - lastArr[j]) / (x[j + 1 + i] - x[j])
+        }
+        mat.add(arr)
+        lastArr = arr
+    }
+    return Expression().apply {
+        expressionString = StringBuilder().apply {
+            for (i in (0 until mat.size)) {
+                if (i != 0) append("+")
+                append(mat[i][0])
+                append("*")
+                val xi = x[i]
+                append("(x - $xi)^$i")
+            }
+        }.toString()
     }
 }

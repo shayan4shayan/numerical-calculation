@@ -45,4 +45,11 @@ class ExampleUnitTest {
     fun root3() {
         assertEquals(-1.0, function.findRoot3(1.5, 0.01), 0.05)
     }
+
+    @Test
+    fun test(){
+        val x = doubleArrayOf(-1.0,0.0,2.0,1.0)
+        val fx = doubleArrayOf(2.0,5.0,11.0,7.0)
+        print(daronyabNioton(x,fx).expressionString)
+    }
 }
