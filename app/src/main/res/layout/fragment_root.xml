@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    android:orientation="vertical">
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/root_choices"
+        android:padding="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/formula"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/hint_function" />
+
+        <ImageView
+            android:id="@+id/draw_formula"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:src="@drawable/ic_equalizer_black_24dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layout_derivative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/derivative"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/hint_derivative" />
+
+        <ImageView
+            android:id="@+id/draw_derivative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:src="@drawable/ic_equalizer_black_24dp" />
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/root_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_root_start"
+        android:inputType="numberSigned" />
+
+    <EditText
+        android:id="@+id/root_end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_root_end"
+        android:inputType="numberSigned" />
+
+    <EditText
+        android:id="@+id/error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_Error"
+        android:text="0.001"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/start_point"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_start_point"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/evaluate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/evaluate_root" />
+
+</LinearLayout>
