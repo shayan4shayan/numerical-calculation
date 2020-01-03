@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import kotlin.Pair;
 
@@ -22,6 +23,11 @@ public class Drawer extends View {
 
     Paint paint;
     private List<Pair<Double, Double>> tmpPoints;
+
+    double xMin = 0;
+    double xMax = 0;
+    double yMin = 0;
+    double yMax = 0;
 
     public Drawer(Context context) {
         super(context);
@@ -38,13 +44,13 @@ public class Drawer extends View {
             public void onGlobalLayout() {
                 Log.d("Drawer", "" + tmpPoints.size());
 
-                double xMin = tmpPoints.get(0).getFirst();
-                double xMax = tmpPoints.get(tmpPoints.size() - 1).getFirst();
+                xMin = tmpPoints.get(0).getFirst();
+                xMax = tmpPoints.get(tmpPoints.size() - 1).getFirst();
 
                 Log.d("drawer", "" + (xMax - xMin));
 
-                double yMin = getYMin(tmpPoints);
-                double yMax = getYMax(tmpPoints);
+                yMin = getYMin(tmpPoints);
+                yMax = getYMax(tmpPoints);
 
                 Log.d("Drawer", "" + (yMax - yMin));
 
@@ -110,6 +116,48 @@ public class Drawer extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        drawCoordinates(canvas);
+        drawFunction(canvas);
+    }
+
+    private void drawCoordinates(Canvas canvas) {
+        float xStep = (float) ((xMax - xMin) / 10f);
+        float yStep = (float) ((yMax - yMin) / 10f);
+
+        float depth = 20f;
+
+        paint.setColor(Color.GRAY);
+        paint.setStrokeWidth(3f);
+        paint.setAlpha(0xaa);
+        paint.setTextSize(24f);
+
+        //drawing background lines
+        canvas.drawLine(0, getHeight() / 2, getWidth(), getHeight() / 2, paint);
+        canvas.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight(), paint);
+
+
+        for (int i = 0; i < 10; i++) {
+            float xPos = (getWidth() / 10) * i;
+            float yPos = getHeight() / 2;
+            canvas.drawLine(xPos, yPos - depth, xPos, yPos + depth, paint);
+            canvas.drawText(String.format(Locale.US, "%.1f", (xMin + (i * xStep))),
+                    xPos, yPos - depth - depth, paint);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            float xPos = getWidth() / 2;
+            float yPos = (getHeight() / 10) * i;
+            canvas.drawLine(xPos - depth, yPos, xPos + depth, yPos, paint);
+            canvas.drawText(String.format(Locale.US, "%.1f", (yMax - (i * yStep))),
+                    xPos + depth + depth, yPos, paint);
+        }
+    }
+
+    private void drawFunction(Canvas canvas) {
+        paint.setAlpha(0);
+        paint.setColor(Color.BLACK);
+        paint.setStrokeWidth(5f);
+
         for (int i = 0; i < points.size() - 1; i++) {
             canvas.drawLine(
                     points.get(i).getFirst(),
