@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">addadi</string>
+    <string name="app_name">محاسبات عددی</string>
     <string name="root_finding">ریشه یابی</string>
     <string name="finding_polynomial_function">درون‌یابی</string>
     <string name="hint_function">تابع را وارد کنید .</string>
@@ -20,6 +20,11 @@
     <string name="root_start">ابتدای بازه</string>
     <string name="root_end">انتهای بازه</string>
     <string name="eval">مقدار تابع</string>
+    <string name="x">X</string>
+    <string name="f_x">f(x)</string>
+    <string name="add">اضافه کردن</string>
+    <string name="evaluate">محاسبه</string>
+    <string name="draw">رسم نمودار</string>
     <array name="root_choices" >
         <item>منصف</item>
         <item>نابجایی</item>

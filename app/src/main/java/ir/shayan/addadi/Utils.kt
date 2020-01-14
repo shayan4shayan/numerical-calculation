@@ -223,11 +223,27 @@ fun daronyabNioton(x: DoubleArray, fx: DoubleArray): Expression {
     return Expression().apply {
         expressionString = StringBuilder().apply {
             for (i in (0 until mat.size)) {
-                if (i != 0) append("+")
-                append(mat[i][0])
-                append("*")
-                val xi = x[i]
-                append("(x - $xi)^$i")
+                if (mat[i][0] != 0.0) {
+                    if (i != 0) append("+")
+                    append(mat[i][0])
+                    var j = i
+                    while (j > 0) {
+                        append("*")
+                        val xj = x[j - 1]
+                        when {
+                            xj>0 -> {
+                                append("(x - $xj)")
+                            }
+                            xj<0 -> {
+                                append("(x+${-xj})")
+                            }
+                            else -> {
+                                append("(x)")
+                            }
+                        }
+                        j--
+                    }
+                }
             }
         }.toString()
     }
