@@ -38,6 +38,10 @@ class RootFragment : Fragment() {
         }
 
         draw_formula.setOnClickListener {
+            if (formula.text.isEmpty() or root_start.text.isEmpty() or root_end.text.isEmpty()){
+                Toast.makeText(context,R.string.error_draw,Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             draw(formula.text.toString(), root_start.text.toString(), root_end.text.toString())
         }
 

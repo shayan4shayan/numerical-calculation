@@ -25,6 +25,8 @@
     <string name="add">اضافه کردن</string>
     <string name="evaluate">محاسبه</string>
     <string name="draw">رسم نمودار</string>
+    <string name="error_draw">لطفا فرمول و ابتدا و انتهای بازه را به درستی مشخص کنید.</string>
+    <string name="error_in">لطفا حداقل یک نقطه اضافه کنید.</string>
     <array name="root_choices" >
         <item>منصف</item>
         <item>نابجایی</item>

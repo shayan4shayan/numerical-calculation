@@ -79,7 +79,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_root_start"
-                android:inputType="numberSigned" />
+                android:digits="0123456789-."
+                android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,6 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_root_end"
+                android:digits="0123456789-."
                 android:inputType="numberSigned" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -104,6 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_Error"
+                android:digits="0123456789."
                 android:inputType="numberDecimal"
                 android:text="0.001" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -116,6 +119,7 @@
                 android:id="@+id/start_point"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:digits="0123456789-."
                 android:hint="@string/hint_start_point"
                 android:visibility="gone" />
         </com.google.android.material.textfield.TextInputLayout>
